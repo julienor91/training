@@ -117,6 +117,29 @@
 		<servlet-name>Upload</servlet-name>
 		<url-pattern>/upload</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Remplacé par l'annotation @WebServlet("/download") de la servlet Download -->
+	<!-- Cependant cette partie est à conserver en utilisant index.jsp -->		
+	<servlet>
+		<servlet-name>Download</servlet-name>
+		<servlet-class>com.sdzee.tp.pro.servlets.Download</servlet-class>
+		<!-- init-param est pour localiser l'endroit où doit être enregistrer définitivement le fichier téléchargé par le navigateur.
+		La Servlet enregistrera automatiquement ce chemin. Attention on peut utiliser un chemin relatif mais il vaut mieux mettre 
+		un chemin absolu (complet) afin d'éviter toutes mauvaises interprétations et une Exception.  Il faut également s'assurer de 
+		l'existance de ce dossier. -->
+		<init-param>
+			<param-name>chemin</param-name> 
+			<param-value>/Users/julienorrado/Desktop/fichiers/</param-value> <!-- Le fichier sera enregistré ici -->
+		</init-param>
+		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 1 lors du démarrage de l'application -->
+		<!-- Cependant très utile lorsqu'il y a plusieurs servlet, cela va du chiffre 0 au plus grand -->
+		<load-on-startup>5</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Download</servlet-name>
+		<url-pattern>/fichiers/*</url-pattern>
+	</servlet-mapping>
 	<!-- ********** FIN D'ENREGISTREMENT DES SERVLETS ********** -->
 	
 	<!-- ********************     ********************     ********************     ******************** -->
