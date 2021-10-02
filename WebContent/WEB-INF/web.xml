@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+				xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+				xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" 
+				version="4.0" 
+				metadata-complete="true">
+	
+	<!-- ********** TEMPS D'EXPIRATION DE LA SESSION EN MINUTES ********** -->
+	<!-- Cela permet de définir le temps d'expiration de la session en minutes en cas d'inactivité de l'utilisateur -->
+	<session-config> 
+		<session-timeout>10</session-timeout>
+	</session-config>
+	<!-- ********** FIN TEMPS D'EXPIRATION DE LA SESSION EN MINUTES ********** -->
+	
+	<!-- ********************     ********************     ********************     ******************** -->
+	
+	<!-- ********** DEBUT ENREGISTREMENT DES SERVLETS ********** -->
+	<!-- Remplacé par l'annotation @WebServlet("/Inscription") de la servlet Inscription -->
+	<!-- Cependant cette partie est à conserver en utilisant index.jsp -->		
+	<servlet>
+		<servlet-name>Inscription</servlet-name>
+		<servlet-class>com.sdzee.tp.pro.servlets.Inscription</servlet-class>
+		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 1 lors du démarrage de l'application -->
+		<!-- Cependant très utile lorsqu'il y a plusieurs servlet, cela va du chiffre 0 au plus grand -->
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Inscription</servlet-name>
+		<url-pattern>/inscription</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Remplacé par l'annotation @WebServlet("/Connexion") de la servlet Connexion -->
+	<!-- Cependant cette partie est à conserver en utilisant index.jsp -->		
+	<servlet>
+		<servlet-name>Connexion</servlet-name>
+		<servlet-class>com.sdzee.tp.pro.servlets.Connexion</servlet-class>
+		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 1 lors du démarrage de l'application -->
+		<!-- Cependant très utile lorsqu'il y a plusieurs servlet, cela va du chiffre 0 au plus grand -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Connexion</servlet-name>
+		<url-pattern>/connexion</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Remplacé par l'annotation @WebServlet("/Inscription") de la servlet Inscription -->
+	<!-- Cependant cette partie est à conserver en utilisant index.jsp -->		
+	<servlet>
+		<servlet-name>Deconnexion</servlet-name>
+		<servlet-class>com.sdzee.tp.pro.servlets.Deconnexion</servlet-class>
+		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 1 lors du démarrage de l'application -->
+		<!-- Cependant très utile lorsqu'il y a plusieurs servlet, cela va du chiffre 0 au plus grand -->
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Deconnexion</servlet-name>
+		<url-pattern>/deconnexion</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Remplacé par l'annotation @WebServlet("/Restriction") de la servlet Restriction -->
+	<!-- Cependant cette partie est à conserver en utilisant index.jsp -->		
+	<servlet>
+		<servlet-name>Restriction</servlet-name>
+		<servlet-class>com.sdzee.tp.pro.servlets.Restriction</servlet-class>
+		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 1 lors du démarrage de l'application -->
+		<!-- Cependant très utile lorsqu'il y a plusieurs servlet, cela va du chiffre 0 au plus grand -->
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Restriction</servlet-name>
+		<url-pattern>/restriction</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Remplacé par l'annotation @WebServlet("/upload") de la servlet Upload -->
+	<!-- Cependant cette partie est à conserver en utilisant index.jsp -->
+	<servlet>
+		<servlet-name>Upload</servlet-name>
+		<servlet-class>com.sdzee.tp.pro.servlets.Upload</servlet-class>
+		<!-- init-param est pour localiser l'endroit où doit être enregistrer définitivement le fichier uploadé par le navigateur.
+		La Servlet l'enregistrera automatiquement à cet emplacement. Attention on peut utiliser un chemin relatif mais il vaut 
+		mieux mettre un chemin absolu (complet) afin d'éviter toutes mauvaises interprétations et une Exception.  Il faut 
+		également s'assurer de l'existance de ce dossier. -->
+		<init-param>
+			<param-name>chemin</param-name> 
+			<param-value>/Users/julienorrado/Desktop/fichiers/</param-value> <!-- Le fichier sera enregistré ici -->
+		</init-param>
+		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 1 lors du démarrage de l'application -->
+		<!-- Cependant très utile lorsqu'il y a plusieurs servlet, cela va du chiffre 0 au plus grand -->
+		<load-on-startup>4</load-on-startup>
+		<!-- multipart-config permet de paramètrer la Servlet pour recevoir des fichiers envoyés depuis le navigateur 
+		et faire fonctionner la méthode getParts() via request.getParts() car request.getParameter() ne fonctionnera pas 
+		avec un envoie de formulaire POST et d'encodage enctype="multipart/form-data" -->
+		<multipart-config>
+			<!-- URL absolue vers un répertoire du système. Cette URL sera utilisée pour stocker temporairement un fichier 
+			lors du traitement des fragments d'une requête, lorsque la taille du fichier est plus grande que la taille spécifiée 
+			dans <file-size-threshold>. Si vous précisez ici un répertoire qui n'existe pas sur le disque, alors Tomcat enverra 
+			une java.io.IOException lorsque vous tenterez d'envoyer un fichier plus gros que cette limite -->
+			<location>/Users/julienorrado/Desktop/fichiers</location>
+			<!-- max-file-size précise la taille maximum en octets autorisée pour un fichier envoyé depuis le navigateur. Si la 
+			taille d'un fichier envoyé dépasse cette limite, le conteneur enverra une exception. En l'occurrence, Tomcat lancera 
+			une IllegalStateException -->
+			<max-file-size>10485760</max-file-size><!-- Correspond à 10 Mo -->
+			<!-- <max-request-size> précise la taille maximum en octets autorisée pour une requête multipart/form-data. Si la 
+			taille totale des données envoyées dans une seule requête dépasse cette limite, le conteneur enverra une exception. -->
+			<max-request-size>52428800</max-request-size><!-- Correspond à 5 x 10 Mo -->
+			<!-- Précise la taille en octets à partir de laquelle un fichier reçu sera temporairement stocké sur le disque. -->
+			<file-size-threshold>1048576</file-size-threshold><!-- Correspond à 1 Mo -->
+		</multipart-config>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Upload</servlet-name>
+		<url-pattern>/upload</url-pattern>
+	</servlet-mapping>
+	<!-- ********** FIN D'ENREGISTREMENT DES SERVLETS ********** -->
+	
+	<!-- ********************     ********************     ********************     ******************** -->
+	
+	<!-- ********** DEBUT ENREGISTREMENT DES FILTRES ********** -->
+<!-- 	<filter> -->
+<!-- 		<filter-name>RestrictionFilter</filter-name> -->
+<!-- 		<filter-class>com.sdzee.tp.pro.filters.RestrictionFilter</filter-class> -->
+<!-- 	</filter> -->
+
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>RestrictionFilter</filter-name> -->
+		<!-- Le caractère * signifie que notre filtre va être appliqué à toutes les pages présentes sous le répertoire /restreint -->
+		<!-- <url-pattern>/restreint/*</url-pattern> -->
+		<!-- Le filtre sera utilisé pour chaque requête -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
+	<!-- ********** FIN D'ENREGISTREMENT DES FILTRES ********** -->
+	
+	<!-- ********************     ********************     ********************     ******************** -->
+	
+	<!-- ********** AFIN DE PLACER LES DIRECTIVES INCLUES DANS LA TAGLIBS A L'INTERIEUR DE TOUTES LES JSP ********** -->
+	<jsp-config>
+		<!-- CECI EST POUR FORCER A INCLURE LA TAGLIBS DANS TOUTES LES JSP -->
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<include-prelude>/WEB-INF/lib/taglibs.jsp</include-prelude>
+		</jsp-property-group>
+		<!-- CECI EST POUR FORCER L'ENCODAGE UTF-8 DANS TOUTES LES JSP -->
+		<!-- REMPLACE <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> -->
+		<!-- Si les paramètres du formulaire sont envoyés avec la méthode post alors ils ne seront plus encodés en UTF-8 mais par le navigateur en ISO -->
+		<!-- L'encodage des paramètres du formulaire envoyé avec la méthode post devra se faire du côté du serveur web Apache -->
+	    <jsp-property-group>
+	        <url-pattern>*.jsp</url-pattern>
+	        <page-encoding>UTF-8</page-encoding>
+	    </jsp-property-group>
+	</jsp-config>
+	<!-- ********** FIN DES DIRECTIVES DE LA TAGLIBS ********** -->
+	
+	<!-- ********************     ********************     ********************     ******************** -->
+	
+	<!-- ********** AFIN D'ENCODER TOUS LES PARAMETRES QUI ARRIVENT DANS LE SERVEUR WEB APACHE ********** -->
+	<!-- Filtre pour encoder les parmètres envoyés avec la méthode post en UTF-8 lorsqu'ils sont traités dans les servlets avant d'être envoyés dans les beans -->
+	<!-- Les jsps déjà encodées en UTF-8 récupèrent ainsi les expressions language directement dans les beans en UTF-8 et non plus en ISO-8859-1 par défault -->
+	<filter>
+		<filter-name>SetCharacterEncoding</filter-name>
+		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ignore</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SetCharacterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- ********** FIN ENCODAGE SERVEUR WEB APACHE ********** -->
+	
+</web-app>
