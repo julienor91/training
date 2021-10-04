@@ -22,7 +22,7 @@
 		<servlet-name>Inscription</servlet-name>
 		<servlet-class>com.sdzee.tp.pro.servlets.Inscription</servlet-class>
 		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 1 lors du démarrage de l'application -->
-		<!-- Cependant très utile lorsqu'il y a plusieurs servlet, cela va du chiffre 0 au plus grand -->
+		<!-- Cependant très utile lorsqu'il y a plusieurs servlets, cela va du chiffre 0 au plus grand -->
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 	
@@ -36,8 +36,8 @@
 	<servlet>
 		<servlet-name>Connexion</servlet-name>
 		<servlet-class>com.sdzee.tp.pro.servlets.Connexion</servlet-class>
-		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 1 lors du démarrage de l'application -->
-		<!-- Cependant très utile lorsqu'il y a plusieurs servlet, cela va du chiffre 0 au plus grand -->
+		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 2 lors du démarrage de l'application -->
+		<!-- Cependant très utile lorsqu'il y a plusieurs servlets, cela va du chiffre 0 au plus grand -->
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
@@ -47,12 +47,12 @@
 	</servlet-mapping>
 	
 	<!-- Remplacé par l'annotation @WebServlet("/Inscription") de la servlet Inscription -->
-	<!-- Cependant cette partie est à conserver en utilisant index.jsp -->		
+	<!-- Cependant cette partie est à conserver en utilisant index.jsp -->
 	<servlet>
 		<servlet-name>Deconnexion</servlet-name>
 		<servlet-class>com.sdzee.tp.pro.servlets.Deconnexion</servlet-class>
-		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 1 lors du démarrage de l'application -->
-		<!-- Cependant très utile lorsqu'il y a plusieurs servlet, cela va du chiffre 0 au plus grand -->
+		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 3 lors du démarrage de l'application -->
+		<!-- Cependant très utile lorsqu'il y a plusieurs servlets, cela va du chiffre 0 au plus grand -->
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	
@@ -66,8 +66,8 @@
 	<servlet>
 		<servlet-name>Restriction</servlet-name>
 		<servlet-class>com.sdzee.tp.pro.servlets.Restriction</servlet-class>
-		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 1 lors du démarrage de l'application -->
-		<!-- Cependant très utile lorsqu'il y a plusieurs servlet, cela va du chiffre 0 au plus grand -->
+		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 4 lors du démarrage de l'application -->
+		<!-- Cependant très utile lorsqu'il y a plusieurs servlets, cela va du chiffre 0 au plus grand -->
 		<load-on-startup>3</load-on-startup>
 	</servlet>
 	
@@ -81,20 +81,20 @@
 	<servlet>
 		<servlet-name>Upload</servlet-name>
 		<servlet-class>com.sdzee.tp.pro.servlets.Upload</servlet-class>
-		<!-- init-param est pour localiser l'endroit où doit être enregistrer définitivement le fichier uploadé par le navigateur.
+		<!-- init-param est pour localiser l'endroit où doit être enregistré définitivement le fichier uploadé par le navigateur.
 		La Servlet l'enregistrera automatiquement à cet emplacement. Attention on peut utiliser un chemin relatif mais il vaut 
-		mieux mettre un chemin absolu (complet) afin d'éviter toutes mauvaises interprétations et une Exception.  Il faut 
+		mieux mettre un chemin absolu (complet) afin d'éviter toute mauvaise interprétation et une Exception.  Il faut 
 		également s'assurer de l'existance de ce dossier. -->
 		<init-param>
 			<param-name>chemin</param-name> 
 			<param-value>/Users/julienorrado/Desktop/fichiers/</param-value> <!-- Le fichier sera enregistré ici -->
 		</init-param>
-		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 1 lors du démarrage de l'application -->
-		<!-- Cependant très utile lorsqu'il y a plusieurs servlet, cela va du chiffre 0 au plus grand -->
+		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 5 lors du démarrage de l'application -->
+		<!-- Cependant très utile lorsqu'il y a plusieurs servlets, cela va du chiffre 0 au plus grand -->
 		<load-on-startup>4</load-on-startup>
 		<!-- multipart-config permet de paramètrer la Servlet pour recevoir des fichiers envoyés depuis le navigateur 
 		et faire fonctionner la méthode getParts() via request.getParts() car request.getParameter() ne fonctionnera pas 
-		avec un envoie de formulaire POST et d'encodage enctype="multipart/form-data" -->
+		avec un envoi de formulaire POST et d'encodage enctype="multipart/form-data" -->
 		<multipart-config>
 			<!-- URL absolue vers un répertoire du système. Cette URL sera utilisée pour stocker temporairement un fichier 
 			lors du traitement des fragments d'une requête, lorsque la taille du fichier est plus grande que la taille spécifiée 
@@ -123,16 +123,16 @@
 	<servlet>
 		<servlet-name>Download</servlet-name>
 		<servlet-class>com.sdzee.tp.pro.servlets.Download</servlet-class>
-		<!-- init-param est pour localiser l'endroit où doit être enregistrer définitivement le fichier téléchargé par le navigateur.
+		<!-- init-param est pour localiser l'endroit où doit être enregistré définitivement le fichier téléchargé par le navigateur.
 		La Servlet enregistrera automatiquement ce chemin. Attention on peut utiliser un chemin relatif mais il vaut mieux mettre 
-		un chemin absolu (complet) afin d'éviter toutes mauvaises interprétations et une Exception.  Il faut également s'assurer de 
+		un chemin absolu (complet) afin d'éviter toute mauvaise interprétation et une Exception.  Il faut également s'assurer de 
 		l'existance de ce dossier. -->
 		<init-param>
 			<param-name>chemin</param-name> 
 			<param-value>/Users/julienorrado/Desktop/fichiers/</param-value> <!-- Le fichier sera enregistré ici -->
 		</init-param>
-		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 1 lors du démarrage de l'application -->
-		<!-- Cependant très utile lorsqu'il y a plusieurs servlet, cela va du chiffre 0 au plus grand -->
+		<!-- Pas obligatoire mais indique que la servlet sera chargée en numéro 6 lors du démarrage de l'application -->
+		<!-- Cependant très utile lorsqu'il y a plusieurs servlets, cela va du chiffre 0 au plus grand -->
 		<load-on-startup>5</load-on-startup>
 	</servlet>
 	

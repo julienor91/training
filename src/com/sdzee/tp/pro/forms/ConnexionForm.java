@@ -58,8 +58,8 @@ public final class ConnexionForm {
          */
         try {
             validationMotDePasse(userPassword);
-        } catch ( Exception e ) {
-            setError(USER_PASSWORD_FIELD, e.getMessage() );
+        } catch (Exception e) {
+            setError(USER_PASSWORD_FIELD, e.getMessage());
         }
         
         /* 

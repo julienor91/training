@@ -16,9 +16,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/restriction")
 public class Restriction extends HttpServlet {
 	
-	/* 
+	/* *
 	 * ********** ATTRIBUTES **************************************************
-	 */
+	 * */
 	private static final long serialVersionUID = 1L;
 	
 	public static final String ACCES_PUBLIC = "/accesPublic.jsp";
@@ -30,23 +30,23 @@ public class Restriction extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-    /*
+    /* *
      * REMPLACE PAR LA CLASSE RESTRICTIONFILTER (QUI IMPLEMENTE FILTER) 
      * Cette servlet n'a donc plus d'utilité dans l'application
-     */
+     * */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		/* 
+		/* *
 		 * Récupération de la session depuis la requête 
-		 */
+		 * */
         HttpSession session = request.getSession();
         
-        /*
+        /* *
          * Si l'objet utilisateur n'existe pas dans la session en cours, alors l'utilisateur n'est pas connecté.
-         */
+         * */
         if (session.getAttribute(ATT_SESSION_USER) == null) {
-            /* 
+            /* *
              * Redirection vers la page publique avec la méthode sendRedirect(). C'est donc le client qui devra refaire 
              * la demande au serveur en question via une requête HTTP.
              * En paramètre => request.getContextPath() + ACCES_PUBLIC
@@ -61,12 +61,12 @@ public class Restriction extends HttpServlet {
              * car si au cours du développement de l'application on serait amené à changer le nom du projet, on n'aurait pas 
              * besoin de rechercher tous les paramètres qui utiliseraient son nom dans les directions par exemple. Avec 
              * request.getContextPath() cela se ferait automatiquement.
-             */
+             * */
             response.sendRedirect(request.getContextPath() + ACCES_PUBLIC);
         } else {
-            /* 
+            /* *
              * Affichage de la page restreinte 
-             */
+             * */
             this.getServletContext().getRequestDispatcher(ACCES_RESTREINT).forward( request, response );
         }
 	}
