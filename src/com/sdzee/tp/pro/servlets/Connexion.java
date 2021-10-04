@@ -21,8 +21,8 @@ import com.sdzee.tp.pro.beans.Utilisateur;
 import com.sdzee.tp.pro.forms.ConnexionForm;
 
 /* *
- * L'annotation @WebServlet("/Connexion") d'origine est remplacé par @WebServlet("/connexion") 
- * car l'URL définie dans le fichier web.xml a été modifié. La servlet Connexion correspond à 
+ * L'annotation @WebServlet("/Connexion") d'origine est remplacée par @WebServlet("/connexion") 
+ * car l'URL définie dans le fichier web.xml a été modifiée. La servlet Connexion correspond à 
  * <url-pattern>/connexion</url-pattern> du fichier web.xml 
  * */
 @WebServlet("/connexion")

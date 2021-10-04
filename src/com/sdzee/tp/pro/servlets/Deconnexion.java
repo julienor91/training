@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/* *
+ * L'annotation @WebServlet("/Deconnexion") d'origine est remplacée par @WebServlet("/deconnexion") 
+ * car l'URL définie dans le fichier web.xml a été modifiée. La servlet Deconnexion correspond à 
+ * <url-pattern>/deconnexion</url-pattern> du fichier web.xml 
+ * */
 @WebServlet("/deconnexion")
 public class Deconnexion extends HttpServlet {
 	

@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/* *
+ * L'annotation @WebServlet("/Restriction") d'origine est remplacée par @WebServlet("/restriction") 
+ * car l'URL définie dans le fichier web.xml a été modifiée. La servlet Restriction correspond à 
+ * <url-pattern>/restriction</url-pattern> du fichier web.xml 
+ * */
 @WebServlet("/restriction")
 public class Restriction extends HttpServlet {
 	

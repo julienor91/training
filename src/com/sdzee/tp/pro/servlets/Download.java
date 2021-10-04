@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /* *
- * L'annotation @WebServlet("/Download") d'origine est remplacé par @WebServlet("/download") 
- * car l'URL définie dans le fichier web.xml a été modifié. La servlet Download correspond à 
+ * L'annotation @WebServlet("/Download") d'origine est remplacée par @WebServlet("/download") 
+ * car l'URL définie dans le fichier web.xml a été modifiée. La servlet Download correspond à 
  * <url-pattern>/download</url-pattern> du fichier web.xml 
  * */
 @WebServlet("/download")
@@ -44,16 +44,18 @@ public class Download extends HttpServlet {
 			throws ServletException, IOException {
 		
 		/* *
-		 * Le paramètre "chemin" est le nom du fichier xml que l'on a enregistré pour la servlet Download. 
-		 * C'est la méthode getInitParameter() qui va récupérer le chemin d'accès (en URL absolu) nommé 
-		 * "chemin", soit => /Users/julienorrado/Desktop/fichiers/
+		 * Le paramètre "chemin" est le nom que l'on a enregistré dans le fichier web.xml pour la servlet Download. 
+		 * Il correspond au chemin où est localisé le fichier à télécharger. C'est la méthode getInitParameter() qui 
+		 * va récupérer le chemin d'accès (en URL absolu) nommé "chemin", 
+		 * soit => /Users/julienorrado/Desktop/fichiers/
  		 * */
 		String chemin = this.getServletConfig().getInitParameter("chemin");
 		
 		/* *
-		 * Récupération du chemin du fichier demandé au sein de l'URL de la requête . La méthode getPathInfo() 
+		 * Récupération du chemin du fichier demandé au sein de l'URL de la requête. La méthode getPathInfo() 
 		 * retourne la fraction de l'URL qui correspond à ce qui est situé entre le chemin de base de la servlet et 
-		 * les paramètres de requête.
+		 * les paramètres de requête. Ce qui correspond au nom du fichier à la fin de l'adresse URL.
+		 * ex URL => /Users/julienorrado/Desktop/fichiers/fichiers html.html => /fichiers html.html
 		 * */
 		String fichierRequis = request.getPathInfo();
 		/* *
@@ -77,7 +79,8 @@ public class Download extends HttpServlet {
 		File fichier = new File(chemin, fichierRequis);
 		        
 		/* *
-		 * Vérifie que le fichier existe bien 
+		 * Vérifie que le fichier existe bien. Si le fichier n'existe pas il renvoie immédiatement la page 404 et le return 
+		 * dans la condition empèche la poursuite de la lecture du code.
 		 * */
 		if (!fichier.exists()) {
 		    /* *
@@ -126,7 +129,16 @@ public class Download extends HttpServlet {
 		    entree = new BufferedInputStream(new FileInputStream(fichier), TAILLE_TAMPON);
 		    sortie = new BufferedOutputStream(response.getOutputStream(), TAILLE_TAMPON);
 		 
-		    /* ... */
+		    /* *
+			 * Lit le fichier et écrit son contenu dans la réponse HTTP. À l'aide d'un tableau d'octets jouant le rôle de tampon, 
+			 * la boucle mise en place parcourt le fichier et l'écrit, morceau par morceau, dans la réponse.
+			 * */
+			byte[] tampon = new byte[TAILLE_TAMPON];
+			int longueur;
+			while ((longueur = entree.read(tampon)) > 0) {
+			    sortie.write(tampon, 0, longueur);
+			}
+			
 		} finally {
 		    try {
 		        sortie.close();
@@ -136,16 +148,6 @@ public class Download extends HttpServlet {
 		        entree.close();
 		    } catch (IOException ignore) {
 		    }
-		}
-		
-		/* *
-		 * Lit le fichier et écrit son contenu dans la réponse HTTP. À l'aide d'un tableau d'octets jouant le rôle de tampon, 
-		 * la boucle mise en place parcourt le fichier et l'écrit, morceau par morceau, dans la réponse.
-		 * */
-		byte[] tampon = new byte[TAILLE_TAMPON];
-		int longueur;
-		while ((longueur= entree.read(tampon)) > 0) {
-		    sortie.write(tampon, 0, longueur);
 		}
 		
 	}

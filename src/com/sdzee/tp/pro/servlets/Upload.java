@@ -12,8 +12,8 @@ import com.sdzee.tp.pro.beans.Fichier;
 import com.sdzee.tp.pro.forms.UploadForm;
 
 /* *
- * L'annotation @WebServlet("/Upload") d'origine est remplacé par @WebServlet("/upload") 
- * car l'URL définie dans le fichier web.xml a été modifié. La servlet Upload correspond à 
+ * L'annotation @WebServlet("/Upload") d'origine est remplacée par @WebServlet("/upload") 
+ * car l'URL définie dans le fichier web.xml a été modifiée. La servlet Upload correspond à 
  * <url-pattern>/upload</url-pattern> du fichier web.xml 
  * */
 @WebServlet("/upload")

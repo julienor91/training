@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.sdzee.tp.pro.beans.Utilisateur;
 import com.sdzee.tp.pro.forms.InscriptionForm;
 
-/* 
- * L'annotation @WebServlet("/Inscription") d'origine est remplacé par @WebServlet("/inscription") 
- * car l'URL définie dans le fichier web.xml a été modifié. La servlet Inscription correspond à 
+/* *
+ * L'annotation @WebServlet("/Inscription") d'origine est remplacée par @WebServlet("/inscription") 
+ * car l'URL définie dans le fichier web.xml a été modifiée. La servlet Inscription correspond à 
  * <url-pattern>/inscription</url-pattern> du fichier web.xml 
- */
+ * */
 @WebServlet("/inscription")
 public class Inscription extends HttpServlet {
 	
